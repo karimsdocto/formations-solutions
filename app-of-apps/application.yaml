@@ -6,7 +6,7 @@ metadata:
 spec:
   destination:
     name: in-cluster
-    namespace: kube-messenger
+    namespace: prod
   source:
     path: k8s/k8s/helm
     repoURL: https://github.com/karimsdocto/formations-solutions/

@@ -14,7 +14,7 @@ spec:
         - values/dev.yaml
   destination:
     name: in-cluster
-    namespace: kube-messenger-dev
+    namespace: dev
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
