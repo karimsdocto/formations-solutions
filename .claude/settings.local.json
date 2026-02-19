@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(kubectl get:*)",
+      "Bash(helm list:*)",
+      "Bash(kubectl apply:*)",
+      "Bash(curl:*)",
+      "Bash(python3:*)",
+      "WebFetch(domain:privatebin.ayanides.cloud)",
+      "Bash(helm get values:*)",
+      "Bash(kubectl delete:*)",
+      "Bash(helm upgrade:*)",
+      "Bash(kubectl config current-context:*)"
+    ]
+  }
+}

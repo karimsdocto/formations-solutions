@@ -7,7 +7,6 @@ frontend:
           - path: /
             pathType: Prefix
 backend:
-  replicaCount: 1
   ingress:
     hosts:
       - host: api.dev.example.fr

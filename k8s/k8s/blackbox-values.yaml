@@ -1,0 +1,47 @@
+config:
+  modules:
+    http_2xx:
+      prober: http
+      timeout: 5s
+      http:
+        valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
+        follow_redirects: true
+        preferred_ip_protocol: "ip4"
+
+prometheusRule:
+  enabled: true
+  additionalLabels:
+    release: my-kube-prometheus-stack
+  rules:
+    - alert: BlackboxProbeFailed
+      expr: probe_success == 0
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Blackbox probe failed for {{ $labels.target }}"
+        description: "Probe {{ $labels.target }} ({{ $labels.instance }}) has been down for more than 2 minutes."
+    - alert: BlackboxProbeSlowResponse
+      expr: probe_duration_seconds > 5
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Slow response for {{ $labels.target }}"
+        description: "Probe {{ $labels.target }} ({{ $labels.instance }}) is taking more than 5 seconds to respond."
+
+serviceMonitor:
+  enabled: true
+  defaults:
+    additionalMetricsRelabels: {}
+    interval: 30s
+    scrapeTimeout: 10s
+    labels:
+      release: my-kube-prometheus-stack
+  targets:
+    - name: google
+      url: https://www.google.com
+    - name: github
+      url: https://www.github.com
+    - name: prometheus
+      url: https://prometheus.io
